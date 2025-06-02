@@ -6,8 +6,8 @@
     'description': """
         Test du module Odoo pour scanner des codes-barres avec un widgets.
     """,
-    'category': 'Inventory/Product',
-    'author': 'InfoSaône',
+    'author'   : 'InfoSaône',
+    'category' : 'InfoSaône',
     'website': 'https://infosaone.com',
     'depends': ['base', 'web'],
     'data': [

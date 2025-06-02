@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields, api
-from odoo.exceptions import UserError
+from odoo import models, fields, api   # type: ignore
+from odoo.exceptions import UserError  # type: ignore
 import time
 
 class ProductBarcodeScanner(models.TransientModel):
@@ -35,8 +35,6 @@ class ProductBarcodeScanner(models.TransientModel):
         print("TEST",barcode,existing_product)
 
         #time.sleep(1)
-
-
 
         # new_product = self.env['product.product'].create({
         #     'name': self.product_name,
