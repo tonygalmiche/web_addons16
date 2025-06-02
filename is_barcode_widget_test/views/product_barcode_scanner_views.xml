@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_barcode_scanner_form_view_custom" model="ir.ui.view">
+            <field name="name">product.barcode.scanner.form.custom</field>
+            <field name="model">product.barcode.scanner</field>
+            <field name="arch" type="xml">
+                <form string="Scanner Article" class="o_product_scanner_form">
+                    <sheet>
+                        <group>
+                            <field name="barcode_input" widget="barcode_scan_widget" />
+                            <field name="barcode_scan"/>
+                            <field name="test_onchange"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="product_barcode_scanner_action" model="ir.actions.act_window">
+            <field name="name">Créer Article par Scan</field>
+            <field name="res_model">product.barcode.scanner</field>
+            <field name="view_mode">form</field>
+        </record>
+        <menuitem id="product_barcode_scanner_menu"
+            name="Scan Articles"
+            action="product_barcode_scanner_action"
+            sequence="10" 
+        />
+    </data>
+</odoo>

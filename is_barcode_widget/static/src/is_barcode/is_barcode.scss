@@ -1,0 +1,29 @@
+.o_barcode_scanner_widget {
+    position: relative;
+
+    .scan_input_hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+        white-space: nowrap;
+    }
+    .scan {
+        display: block;
+        padding: 8px;
+        text-align: center;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        color: #555;
+    }
+    .scan_en_cours {
+        background-color: blue;
+    }
+    .scan_pret {
+        background-color: #f0f0f0;
+    }
+}

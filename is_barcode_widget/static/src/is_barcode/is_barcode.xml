@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="is_barcode_widget.BarcodeScanWidget"  owl="1">
+        <div class="o_barcode_scanner_widget">
+            <input type="text"
+                   class="scan_input_hidden"
+                   t-ref="barcodeInput"
+                   t-att-value="props.value || ''"
+                   t-on-keydown="onKeyDown"
+                   t-on-focus="onFocus"
+                   t-on-blur="onBlur"
+                   aria-label="Barcode Scanner Input"
+                   placeholder="Scanner ici..." />
+            <!-- <span t-esc="state.isScanning"/> -->
+            <span t-if="state.isScanning" class="scan scan_en_cours">Scan en cours...</span>
+            <span t-else="" class="scan scan_pret">Prêt à scanner</span>
+        </div>
+    </t>
+</templates>
