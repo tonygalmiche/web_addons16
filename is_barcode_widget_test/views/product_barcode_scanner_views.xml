@@ -26,5 +26,8 @@
             action="product_barcode_scanner_action"
             sequence="10" 
         />
+
+
+        <menuitem />
     </data>
 </odoo>
