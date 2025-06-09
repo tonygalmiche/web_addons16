@@ -45,9 +45,16 @@ class ProductBarcodeScanner(models.TransientModel):
         # })
         return {'barcode': "%s scanné"%barcode}
 
+        # Rafraîchir le formulaire en cours sans créer de produit
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'reload',
+        }
+
+
         # return {
         #     'type': 'ir.actions.act_window',
-        #     'name': 'Nouvel Article Créé',
+        #     'name': 'Scan',
         #     'res_model': 'product.product',
         #     'res_id': new_product.id,
         #     'view_mode': 'form',

@@ -15,8 +15,8 @@ export class BarcodeScanWidget extends CharField {
     setup() {
         super.setup();
 
-        console.log('Setup this.__owl__.status', this.__owl__.status);
-        console.log('Setup this.props', this.props);
+        //console.log('Setup this.__owl__.status', this.__owl__.status);
+        //console.log('Setup this.props', this.props);
 
         this.orm = useService("orm");
         this.notification = useService("notification");
@@ -29,7 +29,7 @@ export class BarcodeScanWidget extends CharField {
         });
 
         this.barcodeInputRef = useRef("barcodeInput");
-        console.log('Setup this.barcodeInputRef', this.barcodeInputRef, this.barcodeInputRef.el);
+        //console.log('Setup this.barcodeInputRef', this.barcodeInputRef, this.barcodeInputRef.el);
 
         // Surveiller les changements de status
         // this._statusWatcher = setInterval(() => {
@@ -41,13 +41,10 @@ export class BarcodeScanWidget extends CharField {
         // }, 50);
 
         onMounted(() => {
-            console.log('onMounted this.barcodeInputRef', this.barcodeInputRef, this.barcodeInputRef.el);
+            //console.log('onMounted this.barcodeInputRef', this.barcodeInputRef, this.barcodeInputRef.el);
             if (this.barcodeInputRef.el) {
                 this.barcodeInputRef.el.focus();
-
-                console.log('onMounted - this.barcodeInputRef.el:',  this.barcodeInputRef.el);
-
-
+                //console.log('onMounted - this.barcodeInputRef.el:',  this.barcodeInputRef.el);
             }
             document.addEventListener('keydown', this._globalKeydownHandler);
         });
@@ -57,12 +54,12 @@ export class BarcodeScanWidget extends CharField {
 
 
     willStart() {
-        console.log('willStart - Component status:', this.__owl__.status);
+        //console.log('willStart - Component status:', this.__owl__.status);
     }
 
 
     willUnmount() {
-        console.log('willUnmount - Component status:', this.__owl__.status);
+        //console.log('willUnmount - Component status:', this.__owl__.status);
         // if (this._statusWatcher) {
         //     clearInterval(this._statusWatcher);
         // }
@@ -89,15 +86,13 @@ export class BarcodeScanWidget extends CharField {
         if (ev.key === 'Enter') {
             if (this.barcodeBuffer) {
                 this.state.isScanning = true;
-                // MISE À JOUR ICI : Mettre à jour les champs du formulaire AVANT l'appel au serveur
-                this.updateFormFields(this.barcodeBuffer);
+                // SUPPRIMÉ : this.updateFormFields(this.barcodeBuffer);
                 this.handleBarcodeScan(this.barcodeBuffer);
                 this.barcodeBuffer = "";
             }
         } else if (ev.key.length === 1) { // S'assurer que c'est un caractère imprimable
             this.barcodeBuffer += ev.key;
             this.lastInputTime = currentTime;
-            //this.state.isScanning = true;
             clearTimeout(this.barcodeTimeout);
             this.barcodeTimeout = setTimeout(() => {
                 this.barcodeBuffer = "";
@@ -109,13 +104,13 @@ export class BarcodeScanWidget extends CharField {
 
     //Le champ à le focus
     onFocus() {
-        console.log('onFocus');
+        //console.log('onFocus');
         //this.state.isScanning = true;
     }
 
     //Le champ perd le focus
     onBlur() {
-        console.log('onBlur');
+        //console.log('onBlur');
         //this.state.isScanning = false;
         this.barcodeBuffer = "";
         clearTimeout(this.barcodeTimeout);
@@ -134,37 +129,30 @@ export class BarcodeScanWidget extends CharField {
 
 
     async handleBarcodeScan(barcode) {
+        // console.log('Full OWL state:', {
+        //     status: this.__owl__.status,
+        //     error: this.__owl__.error,
+        //     isMounted: this.__owl__.isMounted,
+        //     isDestroyed: this.__owl__.isDestroyed,
+        //     parent: this.__owl__.parent,
+        //     children: this.__owl__.children
+        // });
 
-
-
-        console.log('Full OWL state:', {
-            status: this.__owl__.status,
-            error: this.__owl__.error,
-            isMounted: this.__owl__.isMounted,
-            isDestroyed: this.__owl__.isDestroyed,
-            parent: this.__owl__.parent,
-            children: this.__owl__.children
-        });
-
-        if (this.__owl__.parent) {
-            console.log('Parent state:', {
-                isScanning: this.state.isScanning,
-                status: this.__owl__.parent.status,
-                error: this.__owl__.parent.error
-            });
-        }
-
+        // if (this.__owl__.parent) {
+        //     console.log('Parent state:', {
+        //         isScanning: this.state.isScanning,
+        //         status: this.__owl__.parent.status,
+        //         error: this.__owl__.parent.error
+        //     });
+        // }
 
         var result=false;
         if (this.__owl__.parent.status===1) {
-
-
-
-            console.log('=== APPEL on_barcode_scanned ===', {
-                resModel: this.props.record.resModel,
-                method: 'on_barcode_scanned',
-                args: [barcode]
-            });
+            // console.log('=== APPEL on_barcode_scanned ===', {
+            //     resModel: this.props.record.resModel,
+            //     method: 'on_barcode_scanned',
+            //     args: [barcode]
+            // });
             try {
                     result = await this.orm.call(
                         this.props.record.resModel,
@@ -172,22 +160,20 @@ export class BarcodeScanWidget extends CharField {
                         [barcode]
                     );
 
-
-
-                    console.log('=== SUCCÈS on_barcode_scanned ===', {
-                        resModel: this.props.record.resModel,
-                        result: result,
-                        barcode: barcode
-                    });
+                    // console.log('=== SUCCÈS on_barcode_scanned ===', {
+                    //     resModel: this.props.record.resModel,
+                    //     result: result,
+                    //     barcode: barcode
+                    // });
                     //return result;
             } catch (error) {
-                console.log('=== ERREUR ORM on_barcode_scanned ===', {
-                    resModel: this.props.record.resModel,
-                    TypeErreur: error.constructor.name,
-                    Stack:  error.stack,
-                    Erreur: error,
-                    data: error.data,
-                });                
+                // console.log('=== ERREUR ORM on_barcode_scanned ===', {
+                //     resModel: this.props.record.resModel,
+                //     TypeErreur: error.constructor.name,
+                //     Stack:  error.stack,
+                //     Erreur: error,
+                //     data: error.data,
+                // });                
                 throw error;
             }
         }
@@ -209,10 +195,8 @@ export class BarcodeScanWidget extends CharField {
 
         if (result && result.barcode) {
             this.notification.add(result.barcode, { type: 'success' });
-            // Réinitialiser les autres champs du formulaire pour le prochain scan
             this.props.record.update({
                 barcode_scan: result.barcode,
-                // product_category_id: this.env.ref('product.product_category_all').id, // Remet la catégorie par défaut si nécessaire
             });
         } 
         // else {
